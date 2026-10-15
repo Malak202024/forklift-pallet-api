@@ -1,0 +1,56 @@
+# Forklift and Pallet Detection
+
+This project builds a custom object-detection system to detect forklifts and pallets in warehouse images. The solution uses YOLOv8, a fast and widely used deep learning architecture for real-time object detection.
+
+## Approach
+
+The project follows a standard computer vision workflow:
+
+1. Prepare the labeled dataset.
+2. Train a pretrained YOLOv8 model on the custom warehouse dataset.
+3. Save the best-performing checkpoint.
+4. Evaluate the model with validation metrics.
+5. Run inference on new images.
+6. Expose a FastAPI endpoint that accepts uploaded images and returns detection results.
+
+## Model architecture
+
+The final model is a fine-tuned YOLOv8n object detection model.
+
+- Base model: yolov8n.pt
+- Task: object detection
+- Classes: forklift, pallet
+- Final checkpoint: model/weights/best.pt
+
+This means the network starts from a generic pretrained detector and is adapted to a warehouse inventory problem.
+
+## Project structure
+
+- src/prodml/model.py: model loader
+- src/prodml/pipeline.py: inference wrapper
+- src/prodml/api/main.py: FastAPI API
+- src/prodml/api/schema.py: response structure
+- scripts/train.py: training entry point
+- scripts/evaluate.py: validation and metrics
+- scripts/predict.py: inference on an image
+- dataset/data.yaml: dataset configuration and class names
+- model/weights/best.pt: final trained model checkpoint
+
+## Assumptions
+
+- The dataset is a warehouse environment with forklift and pallet objects.
+- The task is object detection, not instance segmentation.
+- The final model is the best checkpoint selected during training.
+- The API is designed to accept image uploads and return JSON metadata.
+
+## Limitations
+
+- The dataset size is limited compared to large industrial benchmarks.
+- Some annotation files may contain mixed label formats, which can affect training quality.
+- The model is suitable for a project/demo environment, but not necessarily a full-scale production deployment.
+- Performance depends on the quality and diversity of the labeled dataset.
+
+## Training workflow
+
+```bash
+python scripts/train.py --epochs 10

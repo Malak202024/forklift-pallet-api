@@ -1,0 +1,7 @@
+names:
+  0: forklift
+  1: pallet
+path: /home/shalaby/petrochoice-PalletDetection/dataset_clean
+test: test/images
+train: valid/images
+val: valid/images

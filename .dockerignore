@@ -1,0 +1,24 @@
+# environments and caches
+.venv/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.coverage
+htmlcov/
+*.cache
+
+# training artifacts and data (never needed at runtime)
+**/boxes/
+**/dataset/
+**/dataset_clean/
+**/data/
+**/frames/
+runs/
+outputs/
+docs/
+
+# VCS and OS
+.git/
+.gitignore
+.DS_Store
